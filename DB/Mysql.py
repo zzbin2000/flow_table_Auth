@@ -8,7 +8,7 @@ config = {
           'host':'127.0.0.1',
           'port':3306,
           'database':'ovs'}
-def insertSql(sqlIn):
+def executeSql(sqlIn):
     # 连接
     try:
         conn = MySQLdb.connect(
@@ -20,20 +20,20 @@ def insertSql(sqlIn):
         )
         # 创建游标
         cur = conn.cursor()
-        print '...................................insert load sql..................................'
         cur.execute(sqlIn)
         # 关闭游标和连接
         cur.close()
         conn.commit()
         conn.close()
+        print 'execute sql ok...'
     except Exception, e:
       print str(e)
-    print '...................................insert load sql ok ..................................'
+
 def test():
     print 'as'
     # sql1 = "insert into flow_tables (flow_tables,ip,conn_port,thread_id) values ("sss","127.0.0.1",77775,17);"
     sql1 = "insert into flow_tables (flow_tables,ip,conn_port,thread_id) VALUES ('test','127.0.0.1',77775,17)"
-    insertSql(sql1)
+    executeSql(sql1)
 # test()
 
 # print "hello world!"
